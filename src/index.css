@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto+Slab:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto+Slab:wght@300;600;700&display=swap');
 
 html, body{
   width: 100vw;
@@ -9,11 +9,35 @@ html, body{
 
 .App{
   display:flex;
-  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
   flex-direction: column;
   height: 100vh;
 }
+
+.header{
+  display:flex;
+  width: 90vw;
+  height: 10vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reset-button{
+  height: 45%;
+  width: auto;
+  cursor: pointer;
+  color: #b3b3b3;
+  border-radius: 20%;
+  transition: 300ms;
+}
+
+.reset-button:hover{
+  background-color: #3b3b3b;
+}
+
+
+
 
 .header-text{
   color:#b3b3b3;
@@ -36,8 +60,7 @@ html, body{
   align-items: center;
   width: 30vw; 
   flex-wrap: wrap;
-  
-  /*so width is 30, need 5 boxes, and we want margin with the boxes. Make all boxes 5x5 vw?*/
+
 }
 
 .Board-Row{
@@ -50,12 +73,92 @@ html, body{
   align-items: center;
   justify-content: center;
   border: 3px solid #3d3d3d;
-  width:4vw;
-  height:4vw;
+  width:8vh;
+  height:8vh;
   margin: 0.1vw;
   color: #d6d6d6;
   font-size: 30pt;
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
+  transition: 800ms;
+}
+
+.keyboard{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30vw;
+  height: 23vh;
 
 }
+
+.key{
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  border-radius: 10%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 2vw;
+  height: 6vh;
+  background: grey;
+  margin: 0.3vh;
+  color: white;
+  cursor: pointer;
+  transition: 800ms;
+}
+
+.keyboard-row{
+  display:flex;
+  flex-direction: row;
+}
+
+.indicator{
+  border-radius: 50%;
+  width: 1vh;
+  height: 1vh;
+  margin-left: 1vh;
+
+  transition: 300ms;
+}
+
+.modal{
+  display:flex;
+  flex-direction: column;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  cursor: default;
+
+}
+
+.modal-stack{
+  display:flex;
+  flex-direction: row;
+}
+
+
+.modal-reset-button{
+  border-radius: 5px;
+  outline: 1px solid black;
+  margin: 5%;
+  padding: 3%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: 300ms;
+}
+
+.modal-reset-button:hover{
+  cursor: pointer;
+  background-color: #c9c9c9;
+}
+
+.modal-close-button{
+  cursor: pointer;
+  transition: 300ms;
+  outline: 1px solid black;
+  border-radius: 5px;
+}
+
