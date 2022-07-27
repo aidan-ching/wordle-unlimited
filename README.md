@@ -12,4 +12,4 @@ This is a Wordle clone that I created in React with a few extra features to make
 
 
 ## How to use
-There is a github pages deployment that can be accessed on the sidebar, or use `npm start` in command line after cloning the repository to your system. 
+There is a github pages deployment, click [this](https://aidan-ching.github.io/wordle-unlimited/) for the link. Alternatively, use `npm start` in command line after cloning the repository to your system to remotely run the website on your system. 
