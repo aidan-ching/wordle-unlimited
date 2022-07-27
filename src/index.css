@@ -76,7 +76,8 @@ html, body{
 
 .Board-Row{
   display:flex;
-
+  justify-content: center;
+  align-items: center;
 }
 
 .Node{
