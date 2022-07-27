@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header';
 import Board from './Board';
 import Keyboard from './Keyboard';
-import Timer from './Timer';
 import ModalInterior from './ModalInterior';
 
-import Modal from 'react-modal'
+import Modal from 'react-modal';
+import { useTimer } from 'use-timer';
 
-Modal.setAppElement('#root') //have to set for modal
+
+
+Modal.setAppElement('#root'); //have to set for modal
 
 const modalStyle = {  //modal styles
   content: {
@@ -38,13 +40,15 @@ function App() {
   const [discovered, setDiscovered] = useState([]);
   const [yellowLetters, setYellowLetters] = useState([]);
   const [greenLetters, setGreenLetters] = useState([]);
-  const [time, setTime] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
   const [validWord, setValidWord] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   const ans = require('./word_database/wordle-answers-alphabetical.txt')
   const gus = require('./word_database/wordle-allowed-guesses.txt')
+
+  const { time, start, pause, reset, status } = useTimer();
+  
 
   useEffect(() => {
     document.title = 'Wordle Unlimited';
@@ -78,6 +82,11 @@ function App() {
 }
 
   const charInputHelper = (char) =>{
+    if (currLine === 0 && progress[currLine].length === 0){
+      start();
+    }
+
+
     if (progress[currLine].length < 5){ //check for correct length
       let progress_cpy = JSON.parse(JSON.stringify(progress)); //create deep copy
       progress_cpy[currLine].push(char);
@@ -100,7 +109,6 @@ function App() {
 
   const submitHelper = () =>{
     let submit = progress[currLine].join('').toLowerCase() //clean up the string that is being passed in
-    console.log(solution);
     
     if((answers.includes(submit) || guesses.includes(submit)) && submit.length === 5){ //valid submission, now do checking
       let gridColors_cpy = JSON.parse(JSON.stringify(gridColors)); //create deep copy
@@ -153,30 +161,31 @@ function App() {
 
       //now check if its correct or incorrect
       if (submit === solution){
-        //win! open modal
+        //win! open modal and pause the timer
         openModal();
+        pause();
+        setGameOver(true);
       }
       //if we used up all the tries
       else if (currLine === 5){
         openModal();
+        pause();
+        setGameOver(true);
       }
       
-    }
-    else{
-      console.log("Not a valid submission...")
     }
   }
 
   const handleKeyDown = (e) =>{
-    if (e.keyCode >= 65 && e.keyCode <= 90 && !modalOpen){ //check that it is a alpha char
+    if (e.keyCode >= 65 && e.keyCode <= 90 && !modalOpen && !gameOver){ //check that it is a alpha char
       charInputHelper(String.fromCharCode(e.keyCode));
     }
 
-    else if (e.keyCode === 8 && !modalOpen) { //if backspace is pressed
+    else if (e.keyCode === 8 && !modalOpen && !gameOver) { //if backspace is pressed
       delHelper();
     }
 
-    else if (e.keyCode === 13 && !modalOpen){ //Enter is pressed, check if valid then continue
+    else if (e.keyCode === 13 && !modalOpen && !gameOver){ //Enter is pressed, check if valid then continue
       submitHelper();
     }
 
@@ -197,11 +206,9 @@ function App() {
     setModalOpen(false);
   }
 
-  const reset = () =>{
+  const handleReset = () =>{
     //generate a new random answer
-    let ans = getRandAnswer();
-    setSolution(ans);
-    console.log(ans)
+    setSolution(getRandAnswer());
     //clear playing board
     setProgress(Array(6).fill(Array(0)))
     //reset current line to 0
@@ -214,22 +221,32 @@ function App() {
     setGreenLetters([]);
     //turn off modal
     setModalOpen(false);
+    //stop timer and reset the time
+    pause();
+    reset();
+    //change game over
+    setGameOver(false);
+  }
+
+  function getTime(time){
+    let minutes = Math.floor(time/60);
+    let seconds = ((time % 60)).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
 
 
   return (
     <div className="App" onKeyDown={(e) => handleKeyDown(e)} tabIndex="0"> 
-      <Header reset={reset}/>
-
-      <div className='header-break'></div>
+      <Header handleReset={handleReset} time={getTime(time)}/>
+      
 
       <Board progress={progress} gridColors={gridColors} validWord={validWord} currLine={currLine}/>
 
       <Keyboard keyPress={handleKeyboardPress} del={delHelper} submit={submitHelper} discovered={discovered} yellowLetters={yellowLetters} greenLetters={greenLetters}/>
 
       <Modal isOpen={modalOpen} style={modalStyle}>
-        <ModalInterior close={closeModal} solution={solution} currLine={currLine} reset={reset}/>
+        <ModalInterior close={closeModal} solution={solution} currLine={currLine} handleReset={handleReset} time={getTime(time)}/>
       </Modal>
     </div>
   );
