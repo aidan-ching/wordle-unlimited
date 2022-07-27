@@ -1,5 +1,5 @@
 # Wordle Unlimited
-This is a Wordle clone that I created with a few extra features to make it friendlier for people wanting to practice their Wordle skills. A time system has been introduced, and will start when the first input is detected. Players can either use their keyboards or the virutal one on the site. The solution is randomized each time, so players can play as many times as they want to.
+This is a Wordle clone that I created with a few extra features to make it friendlier for people wanting to practice their Wordle skills. A time system has been introduced, and will start when the first input is detected. Players can either use their keyboards or the virutal one on the site. The solution is randomized each time, so players can play as many times as they want to. Additonally, the colored dot next to the input board is for providing a visual aid to correct input. If the input is in the word list, then the dot turns green. Otherwise, the dot stays red.
 
 ![Capture](https://user-images.githubusercontent.com/75757836/181168877-406fb7bf-be38-42ce-8223-f38dcf498f37.PNG)
 
