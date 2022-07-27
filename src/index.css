@@ -15,6 +15,12 @@ html, body{
                                 supported by Chrome, Edge, Opera and Firefox */
 
   /* prevent text from being highlighted */
+
+  
+}
+
+*:focus{
+  box-shadow: none !important;
 }
 
 .App{
