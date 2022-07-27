@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/wordle-unlimited/static/css/main.130b0278.css",
+    "main.js": "/wordle-unlimited/static/js/main.ae401c53.js",
+    "static/js/787.3dd0b630.chunk.js": "/wordle-unlimited/static/js/787.3dd0b630.chunk.js",
+    "static/media/wordle-allowed-guesses.txt": "/wordle-unlimited/static/media/wordle-allowed-guesses.996f3243421f72d6458a.txt",
+    "static/media/wordle-answers-alphabetical.txt": "/wordle-unlimited/static/media/wordle-answers-alphabetical.6ace1dbf5cae3fc37fc3.txt",
+    "index.html": "/wordle-unlimited/index.html",
+    "main.130b0278.css.map": "/wordle-unlimited/static/css/main.130b0278.css.map",
+    "main.ae401c53.js.map": "/wordle-unlimited/static/js/main.ae401c53.js.map",
+    "787.3dd0b630.chunk.js.map": "/wordle-unlimited/static/js/787.3dd0b630.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.130b0278.css",
+    "static/js/main.ae401c53.js"
+  ]
+}
